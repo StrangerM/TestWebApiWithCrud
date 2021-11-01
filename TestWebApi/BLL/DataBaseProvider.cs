@@ -65,7 +65,7 @@ namespace TestWebApi.BLL
             }
         }
 
-        public  DataTable Remove(string query, string connectionString, params SqlParameter[] parameters)
+        public  int Remove(string query, string connectionString, params SqlParameter[] parameters)
         {
             DataTable dataTable = new DataTable();
 
@@ -82,13 +82,9 @@ namespace TestWebApi.BLL
                     {
                         sqlCommand.CommandType = CommandType.StoredProcedure;
                     }
-                    sqlCommand.Parameters.AddRange(parameters);
 
-                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.Fill(dataTable);
-                        return dataTable;
-                    }
+                    sqlCommand.Parameters.AddRange(parameters);
+                    return (int)sqlCommand.ExecuteScalar();  
                 }
             }
         }

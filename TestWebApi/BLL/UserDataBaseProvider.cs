@@ -37,18 +37,18 @@ namespace TestWebApi.BLL
         {
             string query = "sp_Users_Remove";
             DataBaseProvider provider = new DataBaseProvider();
-            DataTable table = new DataTable();
+            int result = 0;
 
             try
             {
-                table = provider.Remove(query, Startup.ConnectionString, new System.Data.SqlClient.SqlParameter("@id", id));
+                result = provider.Remove(query, Startup.ConnectionString, new System.Data.SqlClient.SqlParameter("@id", id));
             }
             catch (Exception ex)
             {
 
             }
 
-            if (table.Rows.Count == 0)
+            if (result == 0)
             {
                 return false;
             }
